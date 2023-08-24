@@ -1,9 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Alura.Filmes.App.Negocio
+﻿namespace Alura.Filmes.App.Negocio
 {
-    internal class Ator
+    public class Ator
     {
         public int Id { get; set; }
         public string PrimeiroNome { get; set; }

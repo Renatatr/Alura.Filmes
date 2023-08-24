@@ -12,6 +12,17 @@ namespace Alura.Filmes.App
         {
             using (var contexto = new AluraFilmesContexto())
             {
+                foreach (var item in contexto.Filmes)
+                {
+                    Console.WriteLine(item);
+                }
+            }
+        }
+
+        private static void VizualizarAtores()
+        {
+            using (var contexto = new AluraFilmesContexto())
+            {
                 //listar os 10 atores modificados recentemente
                 var atores = contexto.Atores.OrderByDescending(x => EF.Property<DateTime>(x, "last_update")).Take(10);
                 foreach (var item in atores)
