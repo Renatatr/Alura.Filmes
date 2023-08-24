@@ -12,6 +12,33 @@ namespace Alura.Filmes.App
         {
             using (var contexto = new AluraFilmesContexto())
             {
+                var filme = contexto.Filmes.Include(c => c.Categorias).ThenInclude(fc => fc.Categoria).First();
+                Console.WriteLine($"Categoria do filme {filme}:");
+                foreach (var item in filme.Categorias)
+                {
+                    Console.WriteLine(item.Categoria);
+                }
+
+                var categorias = contexto.Categorias.Include(c => c.Filmes).ThenInclude(fc => fc.Filme);
+
+                foreach (var c in categorias)
+                {
+                    Console.WriteLine("");
+                    Console.WriteLine($"Filmes da categoria {c}:");
+                    foreach (var fc in c.Filmes)
+                    {
+                        Console.WriteLine(fc.Filme);
+                    }
+                }
+
+
+            }
+        }
+
+        private static void LeituraAtoresDeUmFilme()
+        {
+            using (var contexto = new AluraFilmesContexto())
+            {
                 var filme = contexto.Filmes.Include(a => a.Atores).ThenInclude(fa => fa.Ator).First();
                 Console.WriteLine($"Elenco do filme {filme}:");
                 foreach (var item in filme.Atores)

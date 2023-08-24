@@ -9,7 +9,7 @@ namespace Alura.Filmes.App.Dados
         public DbSet<Ator> Atores { get; set; }
         public DbSet<Filme> Filmes { get; set; }
         public DbSet<FilmeAtor> Elenco { get; set; }
-
+        public DbSet<Categoria> Categorias { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -23,6 +23,11 @@ namespace Alura.Filmes.App.Dados
             modelBuilder.ApplyConfiguration(new FilmeConfiguration());
 
             modelBuilder.ApplyConfiguration(new FilmeAtorConfiguration());
+
+            modelBuilder.ApplyConfiguration(new CategoriaConfiguration());
+
+            modelBuilder.ApplyConfiguration(new FilmeCategoriaConfiguration());
+
 
             //modelBuilder.Entity<Personagem>().ToTable("lotr_characters");
             //modelBuilder.Entity<Personagem>().Property(p => p.Id).HasColumnName("character_id");
