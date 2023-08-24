@@ -15,8 +15,9 @@ namespace Alura.Filmes.App.Migrations
                 {
                     actor_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    first_name = table.Column<string>(type: "varchar(45", nullable: false),
-                    last_name = table.Column<string>(type: "varchar(45", nullable: false)
+                    first_name = table.Column<string>(type: "varchar(45)", nullable: false),
+                    last_name = table.Column<string>(type: "varchar(45)", nullable: false),
+                    last_update = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "getdate()")
                 },
                 constraints: table =>
                 {

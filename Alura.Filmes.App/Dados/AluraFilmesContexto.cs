@@ -1,5 +1,6 @@
 ﻿using Alura.Filmes.App.Negocio;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Alura.Filmes.App.Dados
 {
@@ -9,15 +10,16 @@ namespace Alura.Filmes.App.Dados
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=AluraFilmesTST;Trusted_Connection=true;");
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=AluraFilmes;Trusted_Connection=true;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Ator>().ToTable("actor");
             modelBuilder.Entity<Ator>().Property(a => a.Id).HasColumnName("actor_id");
-            modelBuilder.Entity<Ator>().Property(a => a.PrimeiroNome).HasColumnName("first_name").HasColumnType("varchar(45").IsRequired();
-            modelBuilder.Entity<Ator>().Property(a => a.UltimoNome).HasColumnName("last_name").HasColumnType("varchar(45").IsRequired();
+            modelBuilder.Entity<Ator>().Property(a => a.PrimeiroNome).HasColumnName("first_name").HasColumnType("varchar(45)").IsRequired();
+            modelBuilder.Entity<Ator>().Property(a => a.UltimoNome).HasColumnName("last_name").HasColumnType("varchar(45)").IsRequired();
+            modelBuilder.Entity<Ator>().Property<DateTime>("last_update").HasColumnType("datetime").HasDefaultValueSql("getdate()").IsRequired();
 
             //modelBuilder.Entity<Personagem>().ToTable("lotr_characters");
             //modelBuilder.Entity<Personagem>().Property(p => p.Id).HasColumnName("character_id");
