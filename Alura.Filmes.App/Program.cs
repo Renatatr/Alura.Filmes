@@ -10,7 +10,20 @@ namespace Alura.Filmes.App
     {
         static void Main(string[] args)
         {
-            ListarFilmesPorIdioma(); 
+
+            using (var contexto = new AluraFilmesContexto())
+            {
+                var ator1 = new Ator { PrimeiroNome = "abc", UltimoNome = "def" };
+                var ator2 = new Ator { PrimeiroNome = "abc", UltimoNome = "def" };
+                contexto.Atores.AddRange(ator1,ator2);
+                contexto.SaveChanges();
+
+                var abcDef = contexto.Atores.Where(a => a.PrimeiroNome == "abc" && a.UltimoNome == "def");
+                Console.WriteLine($"Atores com o nome {ator1.PrimeiroNome}: {abcDef.Count()}");
+
+            }
+
+
         }
 
         private static void ListarFilmesPorIdioma()
