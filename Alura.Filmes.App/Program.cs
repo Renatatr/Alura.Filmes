@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Principal;
 using Alura.Filmes.App.Dados;
@@ -14,7 +15,39 @@ namespace Alura.Filmes.App
         {
             using (var contexto = new AluraFilmesContexto())
             {
+                var sql = "INSERT INTO language (name) VALUES ('Teste 1'), ('Teste 2'), ('Teste 3')";
+                var registros = contexto.Database.ExecuteSqlCommand(sql);
+                Console.WriteLine($"total registros afetados {registros}");
 
+                var deleteSql = "DELETE FROM language where name LIKE 'Teste%'";
+                registros = contexto.Database.ExecuteSqlCommand(deleteSql);
+                Console.WriteLine($"total registros afetados {registros}");
+            }
+        }
+
+        private static void UsandoStoredProcedure()
+        {
+            using (var contexto = new AluraFilmesContexto())
+            {
+                var categ = "Action";
+                var paramCateg = new SqlParameter("category_name", categ);
+                var paramTotal = new SqlParameter
+                {
+                    ParameterName = "@total_actors",
+                    Size = 4,
+                    Direction = System.Data.ParameterDirection.Output
+                };
+
+                contexto.Database.ExecuteSqlCommand("total_actors_from_given_category @category_name, @total_actors OUT",
+                    paramCateg, paramTotal);
+                Console.WriteLine($"O total de atores na categoria {categ} é de {paramTotal.Value}");
+            }
+        }
+
+        private static void SelectSemEntity()
+        {
+            using (var contexto = new AluraFilmesContexto())
+            {
                 var sql = @"select a.*
                             from actor a
                               inner join top5_most_starred_actors filmes on filmes.actor_id = a.actor_id";
@@ -23,10 +56,9 @@ namespace Alura.Filmes.App
                 var atoresMaisAtuantes = contexto.Atores.FromSql(sql).Include(x => x.Filmografia);
                 foreach (var item in atoresMaisAtuantes)
                 {
-                    Console.WriteLine($"O ator: {item.PrimeiroNome + " " + item.UltimoNome} atuou em {item.Filmografia.Count} filmes");
+                    Console.WriteLine(
+                        $"O ator: {item.PrimeiroNome + " " + item.UltimoNome} atuou em {item.Filmografia.Count} filmes");
                 }
-
-
             }
         }
 
