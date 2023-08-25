@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Principal;
 using Alura.Filmes.App.Dados;
+using Alura.Filmes.App.Extensions;
 using Alura.Filmes.App.Negocio;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,20 +12,45 @@ namespace Alura.Filmes.App
     {
         static void Main(string[] args)
         {
-
             using (var contexto = new AluraFilmesContexto())
             {
-                var ator1 = new Ator { PrimeiroNome = "abc", UltimoNome = "def" };
-                var ator2 = new Ator { PrimeiroNome = "abc", UltimoNome = "def" };
-                contexto.Atores.AddRange(ator1,ator2);
+                foreach (var item in contexto.Clientes)
+                {
+                    Console.WriteLine(item);
+                }
+
+                Console.WriteLine("funcionários:");
+                foreach (var item in contexto.Funcionarios)
+                {
+                    Console.WriteLine(item);
+                }
+            }
+        }
+
+        private static void InclusaoFilme()
+        {
+            using (var contexto = new AluraFilmesContexto())
+            {
+                //var livre = ClassificacaoIndicativa.MaioresQue13;
+                //Console.WriteLine(livre.ParaString());
+                //Console.WriteLine("G".ParaInt());
+
+                var idioma = new Idioma { Nome = "English" };
+
+                var filme = new Filme();
+                filme.Titulo = "mom";
+                filme.Duracao = 110;
+                filme.AnoLancamento = "2013";
+                filme.Classificacao = ClassificacaoIndicativa.MaioresQue13;
+                filme.IdiomaFalado = idioma;
+                contexto.Entry(filme).Property("last_update").CurrentValue = DateTime.Now;
+
+                contexto.Filmes.Add(filme);
                 contexto.SaveChanges();
 
-                var abcDef = contexto.Atores.Where(a => a.PrimeiroNome == "abc" && a.UltimoNome == "def");
-                Console.WriteLine($"Atores com o nome {ator1.PrimeiroNome}: {abcDef.Count()}");
-
+                var filmeInserido = contexto.Filmes.First(f => f.Titulo == "mom");
+                Console.WriteLine(filmeInserido.Classificacao);
             }
-
-
         }
 
         private static void ListarFilmesPorIdioma()

@@ -11,11 +11,14 @@ namespace Alura.Filmes.App.Dados
         public DbSet<FilmeAtor> Elenco { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Idioma> Idiomas { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Funcionario> Funcionarios { get; set; }
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=AluraFilmesTST;Trusted_Connection=true;");
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=AluraFilmes;Trusted_Connection=true;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -26,7 +29,8 @@ namespace Alura.Filmes.App.Dados
             modelBuilder.ApplyConfiguration(new CategoriaConfiguration());
             modelBuilder.ApplyConfiguration(new FilmeCategoriaConfiguration());
             modelBuilder.ApplyConfiguration(new IdiomaConfiguration());
-
+            modelBuilder.ApplyConfiguration(new ClienteConfiguration());
+            modelBuilder.ApplyConfiguration(new FuncionarioConfiguration());
 
             //modelBuilder.Entity<Personagem>().ToTable("lotr_characters");
             //modelBuilder.Entity<Personagem>().Property(p => p.Id).HasColumnName("character_id");

@@ -136,24 +136,36 @@
   <ItemGroup>
     <Compile Include="Dados\AluraFilmesContexto.cs" />
     <Compile Include="Dados\AtorConfiguration.cs" />
+    <Compile Include="Dados\ClienteConfiguration.cs" />
     <Compile Include="Dados\FilmeAtorConfiguration.cs" />
     <Compile Include="Dados\CategoriaConfiguration.cs" />
     <Compile Include="Dados\FilmeCategoriaConfiguration.cs" />
     <Compile Include="Dados\FilmeConfiguration.cs" />
+    <Compile Include="Dados\FuncionarioConfiguration.cs" />
     <Compile Include="Dados\IdiomaConfiguration.cs" />
+    <Compile Include="Dados\PessoaConfiguration.cs" />
+    <Compile Include="Extensions\ClassificacaoIndicativaExtensions.cs" />
     <Compile Include="Extensions\DbContextExtensions.cs" />
-    <Compile Include="Migrations\20230824164333_Inicial.cs" />
-    <Compile Include="Migrations\20230824164333_Inicial.designer.cs">
-      <DependentUpon>20230824164333_Inicial.cs</DependentUpon>
+    <Compile Include="Migrations\20230825142625_Atualizacao.cs" />
+    <Compile Include="Migrations\20230825142625_Atualizacao.designer.cs">
+      <DependentUpon>20230825142625_Atualizacao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20230825143159_FilmeCheckConstraint.cs" />
+    <Compile Include="Migrations\20230825143159_FilmeCheckConstraint.designer.cs">
+      <DependentUpon>20230825143159_FilmeCheckConstraint.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\AluraFilmesContextoModelSnapshot.cs" />
     <Compile Include="Negocio\Ator.cs" />
     <Compile Include="Negocio\Categoria.cs" />
+    <Compile Include="Negocio\ClassificacaoIndicativa.cs" />
+    <Compile Include="Negocio\Cliente.cs" />
     <Compile Include="Negocio\Filme.cs" />
     <Compile Include="Negocio\FilmeAtor.cs" />
     <Compile Include="Negocio\FilmeCategoria.cs" />
+    <Compile Include="Negocio\Funcionario.cs" />
     <Compile Include="Negocio\Idioma.cs" />
     <Compile Include="Negocio\Personagem.cs" />
+    <Compile Include="Negocio\Pessoa.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

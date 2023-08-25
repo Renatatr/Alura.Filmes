@@ -10,7 +10,7 @@ namespace Alura.Filmes.App.Dados
         {
             builder.ToTable("language");
             builder.Property(x => x.Id).HasColumnName("language_id");
-            builder.Property(x => x.Nome).HasColumnName("name").HasColumnType("charvar(20)").IsRequired();
+            builder.Property(x => x.Nome).HasColumnName("name").HasColumnType("varchar(20)").IsRequired();
         }
     }
 }
